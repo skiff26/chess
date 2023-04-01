@@ -1,0 +1,149 @@
+.title{
+	font-family: 'Times New Roman', sans-serif;
+	letter-spacing: 0.5em;
+	padding: 20px 15px;
+	text-align: center;
+	font-size: 44px;
+	color: #f0e7e7;
+	@media (max-width: 1200px){
+		font-size: 36px;
+		padding: 15px 5px;
+		margin-bottom: 10px;
+	}
+	@media (max-width: 720px){
+		font-size: 30px;
+	}
+}
+.main {
+	display: flex;
+	flex-wrap: wrap;
+}
+.block {
+	position: relative;
+	z-index: 100;
+	width: 564px;
+	height: max-content;
+	margin: 30px auto;
+	@media (max-width: 625px){
+		width: 394px;
+	}
+	@media (max-width: 435px){
+		margin: 10vh auto;
+		width: 314px;
+	}
+}
+.letter-number{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom-left-radius: 85px;
+	border-bottom-right-radius: 85px;
+	background: rgb(78,58,1);
+	background: linear-gradient(270deg, rgba(78,58,1,1) 0%, rgba(129,78,21,1) 50%, rgba(111,63,14,1) 100%);
+	span {
+		color: rgba(255, 255, 255, 0.7);
+		width: 64px;
+		height: 25px;
+		display: flex;
+		align-items: center;
+		justify-content: center;	
+		@media (max-width: 625px){
+			width: 44px;
+			height: 20px;
+		}
+		@media (max-width: 435px){
+			width: 34px;
+			height: 20px;
+		}
+	}
+	@media (max-width: 435px){
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
+}
+.content {
+	display: flex;
+}
+.number{
+	display: flex;	
+	align-items: center;
+	flex-direction: column-reverse;
+	background: rgb(78,58,1);
+	background: linear-gradient(270deg, rgba(78,58,1,1) 0%, rgba(129,78,21,1) 50%, rgba(111,63,14,1) 100%);
+	span {
+		color: rgba(255, 255, 255, 0.7);
+		width: 25px;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		@media (max-width: 625px){
+			width: 20px;
+			height: 34px;
+		}
+	}
+}
+// INFO
+.chess-board {
+	display: block; 
+	border: 1px solid black;
+ }
+ 
+ .row {
+	display: flex;
+	flex-direction: row;
+ }
+ 
+ .square {
+	width: 64px;
+	height: 64px;
+	border: 1px solid black;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	@media (max-width: 625px){
+		width: 44px;
+		height: 44px;
+	}
+	@media (max-width: 435px){
+		width: 34px;
+		height: 34px;
+	}
+ }
+ 
+ .white {
+	background-color: rgba(255, 255, 255, 0.95);
+ }
+ 
+ .black {
+	background-color: rgba(128, 128, 128, 0.95);
+ }
+ 
+ .selected {
+	background-color: rgba(255, 208, 0, 0.712);
+
+ }
+ .option {
+	background-color: rgba(255, 255, 0, 0.719);
+ }
+ .beat{
+	background-color: rgba(235, 42, 42, 0.856);
+ }
+// HELP CLASSES
+.transform-rotate {
+	transform: rotateX(180deg);
+}
+.rotate-anim {
+	transition: all 1s ease 0s;
+}
+.small-piece {
+	position: absolute;
+	left: -7px;
+	top: -7px;
+	transform: scale(0.8);
+}
+.cursor-pointer{
+	cursor: pointer;
+}
