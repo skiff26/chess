@@ -11,6 +11,7 @@
  </template>
  
  <script>
+import { toHandlerKey } from 'vue';
 import icons from '../icons'
  const BLACK_PIECES = [icons['pawnBlack'], icons['kingBlack'], icons['queenBlack'], icons['elephantBlack'], icons['karolBlack'], icons['rookBlack']];
  const WHITE_PIECES = [icons['pawnWhite'], icons['kingWhite'], icons['queenWhite'], icons['elephantWhite'], icons['karolWhite'], icons['rookWhite']]
@@ -476,7 +477,38 @@ import icons from '../icons'
 			board[rowIndex].splice(colIndex, 1, item); // insert el at new position
 			this.saveBoard = saveBoard
 			this.isChecked = false
-			// NEXT REFACTOR
+			this.willCheck(rowIndex, colIndex, board, item)
+			if (this.isChecked) {
+				this.board[this.basicX].splice(this.basicY, 1, item);
+				this.board[rowIndex].splice(colIndex, 1, ' ');
+				console.log('BACK // check')
+			}
+		},
+		beatLogic(rowIndex, colIndex){
+			let board = this.board.slice(); // copy array
+			const saveBoard = this.board.slice(); // copy array
+			const bitem =  board[rowIndex][colIndex]
+			const item = board[this.basicX][this.basicY]; // save el
+			this.board[this.basicX].splice(this.basicY, 1, ' '); // del el from first position
+			this.board[rowIndex].splice(colIndex, 1, item); // insert el at new position	
+			this.saveBoard = saveBoard
+			this.isChecked = false
+			if(this.isChecked){
+				this.board[this.basicX].splice(this.basicY, 1, item);
+				this.board[rowIndex].splice(colIndex, 1, bitem);
+			} else {
+				this.board[this.basicX].splice(this.basicY, 1, ' ');
+				this.board[rowIndex].splice(colIndex, 1, item);
+				this.willCheck(rowIndex, colIndex, board, item)
+				if (this.isChecked){
+					this.board[this.basicX].splice(this.basicY, 1, item);
+					this.board[rowIndex].splice(colIndex, 1, bitem);
+					console.log('BACK // check beat')
+				}
+			}
+		},
+		willCheck(rowIndex, colIndex, board, item){
+			// REFACTOR NEXT
 			if(this.check.length > 1){
 				this.generateElephantAndQueenMoves(this.check[0], this.check[1], this.board, this.options);
 			}
@@ -672,24 +704,6 @@ import icons from '../icons'
 						}
 					}
 				}
-			}
-		},
-		beatLogic(rowIndex, colIndex){
-			let board = this.board.slice(); // copy array
-			const saveBoard = this.board.slice(); // copy array
-			const bitem =  board[rowIndex][colIndex]
-			const item = board[this.basicX][this.basicY]; // save el
-			this.board[this.basicX].splice(this.basicY, 1, ' '); // del el from first position
-			this.board[rowIndex].splice(colIndex, 1, item); // insert el at new position	
-			this.saveBoard = saveBoard
-			this.isChecked = false
-			this.checkLogic(rowIndex, colIndex)
-			if(this.isChecked){
-				this.board[this.basicX].splice(this.basicY, 1, item);
-				this.board[rowIndex].splice(colIndex, 1, bitem);
-			} else {
-				this.board[this.basicX].splice(this.basicY, 1, ' ');
-				this.board[rowIndex].splice(colIndex, 1, item);
 			}
 		},
 		onResize(){
